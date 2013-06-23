@@ -1,0 +1,7 @@
+LPCTSTR
+	MAIN_WINDOW_CLASS_NAME = TEXT("RecMazeGameMainWindow"),
+	MAIN_WINDOW_TITLE = TEXT("AMazeING game (get it)");
+
+const int
+	MAIN_WINDOW_WIDTH = 640,
+	MAIN_WINDOW_HEIGHT = 480;
