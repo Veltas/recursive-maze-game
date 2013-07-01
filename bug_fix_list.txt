@@ -1,0 +1,14 @@
+BUG:
+	Title in main window appears in jibberish chinese.
+WHY:
+	String was being stored as ASCII, UNICODE hadn't been defined where it was being saved, predefs.hpp contained UNICODE macro definition for the project.
+	Chinese happens to be the Unicode of much typical western text in ASCII.
+FIX:
+	Included the 'predefs.hpp' header in 'defs_n_consts.hpp' file.
+
+BUG:
+	White window until forcing paint and then black window.
+WHY:
+	Clearly the responce to WM_PAINT message is malfunctioning.
+TRY:
+	

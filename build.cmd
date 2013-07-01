@@ -1,15 +1,10 @@
 @SETLOCAL
 
+@SET OUTPUTNAME=maze_game.exe
+@SET LIBINPUT=user32.lib kernel32.lib Gdiplus.lib
+@SET PRECOMPILED=wtotal_failure_error.obj defs_n_consts.obj game.obj draw_game.obj
+@SET INPUTFILES=main.cpp
 
+@CL /EHsc /Fe%OUTPUTNAME% %LIBINPUT% %PRECOMPILED% %INPUTFILES%
 
-
-
-@SET COMPILE=main.cpp wtotal_failure_error.obj user32.lib kernel32.lib
-@SET OUTPUT_NAME=maze_game.exe
-
-
-
-
-
-@CL /EHsc %COMPILE% /Fe%OUTPUT_NAME%
 @ENDLOCAL
