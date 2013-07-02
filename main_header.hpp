@@ -1,7 +1,3 @@
-// Realistically nobody should ever include this header more than once but better safe than sorry.
-#ifndef _MAIN_HEADER_HPP_INCLUDED_
-#define _MAIN_HEADER_HPP_INCLUDED_
-
 #include "predefs.hpp"
 
 #include <vector>
@@ -18,4 +14,6 @@
 #include "game.hpp"
 #include "draw_game.hpp"
 
+#ifdef DEBUG
+#include "debugger.hpp"
 #endif

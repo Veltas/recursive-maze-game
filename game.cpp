@@ -24,6 +24,7 @@ void Game::InitialiseMazeState(MazeState &mazeState)
 	}
 	
 	// Generate maze within.
+	DEBUG_OUT(TEXT("RecursiveMazeFiller() recursion started"));
 	RecursiveMazeFiller(mazeState, 0, 0, MAZE_GRID_WIDTH - 1, MAZE_GRID_HEIGHT - 1);
 }
 
@@ -50,12 +51,13 @@ void Game::RecursiveMazeFiller(MazeState &mazeState, int topLeftX, int topLeftY,
 		mazeState.cellFlags[manipulationPoint][splitX] ^= CELL_WALL_LEFT;
 		
 		// Morally ambiguous jump cell placer.
-		if (std::rand() % MAZE_STRANGE_WALL_EXPECTED_PERIOD) {
+		if (!(std::rand() % MAZE_STRANGE_WALL_EXPECTED_PERIOD)) {
 			TwoArray<int> newJumpPos((std::rand() % 2) ? (splitX - 1) : splitX, manipulationPoint);
 			if (!((newJumpPos.array[0] == mazeState.currentPosition[0]) && (newJumpPos.array[1] == mazeState.currentPosition[1]))
 				&& !((newJumpPos.array[0] == mazeState.end[0]) && (newJumpPos.array[1] == mazeState.end[1]))
 				&& (std::find(mazeState.jumps.begin(), mazeState.jumps.end(), newJumpPos) == mazeState.jumps.end()))
 			{
+				DEBUG_OUT(TEXT("New jump position."));
 				mazeState.jumps.push_back(newJumpPos);
 			}
 		}

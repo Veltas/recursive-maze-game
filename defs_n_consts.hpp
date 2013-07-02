@@ -6,6 +6,10 @@
 #include <Windows.h>
 #include <Gdiplus.h>
 
+#ifdef DEBUG
+#include "debugger.hpp"
+#endif
+
 extern "C" LPCTSTR
 	MAIN_WINDOW_CLASS_NAME,
 	MAIN_WINDOW_TITLE;
@@ -34,5 +38,9 @@ extern Gdiplus::SolidBrush
 	MY_RED_BRUSH,
 	MY_BLUE_BRUSH,
 	WEAK_BLACK_BRUSH;
+
+#ifdef DEBUG
+extern Debugger *globalDebugger; // DO NOT CHANGE
+#endif
 
 #endif
