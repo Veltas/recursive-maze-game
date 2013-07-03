@@ -11,4 +11,7 @@ BUG:
 WHY:
 	Clearly the responce to WM_PAINT message is malfunctioning.
 TRY:
-	
+	Analysing painting process in depth.
+FIX:
+	First thing's first, GDI+ was not being initialised and shutdown, added appropriate functions.
+Still broken, moving over to github's own bugs system.

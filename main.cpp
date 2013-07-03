@@ -23,6 +23,17 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 	gdiplusStartupInput.SuppressExternalCodecs = TRUE;
 	if (Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL) != Gdiplus::Ok) TotalFailureError();
 	
+	// Initialise GDI+ objects
+	MY_BLACK_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0, 0, 0)),
+	MY_WHITE_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF)),
+	MY_RED_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0xFF, 0, 0));
+
+	MY_BLACK_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0)),
+	MY_WHITE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF)),
+	MY_RED_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0xFF, 0, 0)),
+	MY_BLUE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0xFF)),
+	WEAK_BLACK_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xAA, 0, 0, 0));
+	
 	// Register window 'class' with OS in preperation for creating window.
 	DEBUG_OUT(TEXT("RegisterClassEx() . . ."));
 	WNDCLASSEX mainWindowClass = {
@@ -90,8 +101,10 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 	case WM_PAINT:
 		{
 			PAINTSTRUCT paintJobStruct;
-			// DrawGame requires a device context and game data to operate on.
-			DrawGame(BeginPaint(windowHandle, &paintJobStruct), *mainGameObject);
+			HDC deviceContextHandle = BeginPaint(windowHandle, &paintJobStruct);
+			DEBUG_VAL(TEXT("BeginPaint()"), reinterpret_cast<int>(deviceContextHandle));
+			Gdiplus::Graphics graphics(deviceContextHandle);
+			DrawGame(graphics, *mainGameObject);
 			EndPaint(windowHandle, &paintJobStruct);
 		}
 		break;
@@ -114,7 +127,8 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 		if (wParam == MAIN_CYCLE_TIMER_ID) {
 			// This is where the 'main game loop' kicks in.  This line should be reached at a frequency of about 60Hz.
 			mainGameObject->Step(windowHandle);
-			RedrawWindow(windowHandle, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
+			InvalidateRect(windowHandle, NULL, TRUE);
+			UpdateWindow(windowHandle);
 		}
 		break;
 		
@@ -135,4 +149,3 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 	}
 	return 0;
 }
-

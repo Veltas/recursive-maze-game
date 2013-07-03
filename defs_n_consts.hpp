@@ -1,3 +1,5 @@
+// Definitions, constants, and also a lot of globals that nobody else wanted.
+
 #ifndef _DEFS_N_CONSTS_INCLUDED_
 #define _DEFS_N_CONSTS_INCLUDED_
 
@@ -15,7 +17,7 @@ extern "C" LPCTSTR
 	MAIN_WINDOW_TITLE;
 
 #define MAZE_GRID_WIDTH 10
-#define MAZE_GRID_HEIGHT 480
+#define MAZE_GRID_HEIGHT 6
 	
 extern const unsigned
 	MAIN_WINDOW_WIDTH,
@@ -28,16 +30,16 @@ extern const unsigned
 	MAZE_STRANGE_WALL_EXPECTED_PERIOD;
 
 extern Gdiplus::Pen
-	MY_BLACK_PEN,
-	MY_WHITE_PEN,
-	MY_RED_PEN;
+	*MY_BLACK_PEN,
+	*MY_WHITE_PEN,
+	*MY_RED_PEN;
 
 extern Gdiplus::SolidBrush
-	MY_BLACK_BRUSH,
-	MY_WHITE_BRUSH,
-	MY_RED_BRUSH,
-	MY_BLUE_BRUSH,
-	WEAK_BLACK_BRUSH;
+	*MY_BLACK_BRUSH,
+	*MY_WHITE_BRUSH,
+	*MY_RED_BRUSH,
+	*MY_BLUE_BRUSH,
+	*WEAK_BLACK_BRUSH;
 
 #ifdef DEBUG
 extern Debugger *globalDebugger; // DO NOT CHANGE

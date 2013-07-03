@@ -10,6 +10,6 @@
 
 #include "game.hpp"
 
-void DrawGame(HDC, Game &currentGame);
+void DrawGame(Gdiplus::Graphics &, Game &currentGame);
 
 #endif

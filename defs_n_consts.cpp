@@ -8,23 +8,23 @@ extern const unsigned
 	MAIN_WINDOW_WIDTH = 640,
 	MAIN_WINDOW_HEIGHT = 480,
 	MAIN_CYCLE_TIMER_ID = 1,
-	MAIN_CYCLE_WAIT = 33, // Wait between each cycle in ms, 16.666ms = 1 / 60Hz.
+	MAIN_CYCLE_WAIT = 5000, // Wait between each cycle in ms, 16.666ms = 1 / 60Hz.
 	MAZE_GRID_CELL_SIZE = 10,
 	CELL_WALL_UP = 1,
 	CELL_WALL_LEFT = 2,
 	MAZE_STRANGE_WALL_EXPECTED_PERIOD = 50;
 
 extern Gdiplus::Pen
-	MY_BLACK_PEN(Gdiplus::Color(0xFF, 0, 0, 0)),
-	MY_WHITE_PEN(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF)),
-	MY_RED_PEN(Gdiplus::Color(0xFF, 0xFF, 0, 0));
+	*MY_BLACK_PEN = NULL,
+	*MY_WHITE_PEN = NULL,
+	*MY_RED_PEN = NULL;
 
 extern Gdiplus::SolidBrush
-	MY_BLACK_BRUSH(Gdiplus::Color(0xFF, 0, 0, 0)),
-	MY_WHITE_BRUSH(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF)),
-	MY_RED_BRUSH(Gdiplus::Color(0xFF, 0xFF, 0, 0)),
-	MY_BLUE_BRUSH(Gdiplus::Color(0xFF, 0, 0, 0xFF)),
-	WEAK_BLACK_BRUSH(Gdiplus::Color(0xAA, 0, 0, 0));
+	*MY_BLACK_BRUSH = NULL,
+	*MY_WHITE_BRUSH = NULL,
+	*MY_RED_BRUSH = NULL,
+	*MY_BLUE_BRUSH = NULL,
+	*WEAK_BLACK_BRUSH = NULL;
 
 #ifdef DEBUG
 extern Debugger *globalDebugger = NULL; // DO NOT CHANGE
