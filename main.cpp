@@ -112,6 +112,7 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 		{
 			PAINTSTRUCT paintJobStruct;
 			Gdiplus::Graphics graphics(BeginPaint(windowHandle, &paintJobStruct));
+			graphics.SetSmoothingMode(GRAPHICS_SMOOTHING_MODE);
 			DrawGame(graphics, *mainGameObject);
 			EndPaint(windowHandle, &paintJobStruct);
 		}
@@ -135,8 +136,9 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 		if (wParam == MAIN_CYCLE_TIMER_ID) {
 			// This is where the 'main game loop' kicks in.  This line should be reached at a frequency of about 60Hz.
 			mainGameObject->Step(windowHandle);
-			InvalidateRect(windowHandle, NULL, TRUE);
-			UpdateWindow(windowHandle);
+			RedrawWindow(windowHandle, NULL, NULL, RDW_INVALIDATE);
+			//InvalidateRect(windowHandle, NULL, TRUE);
+			//UpdateWindow(windowHandle);
 		}
 		break;
 		

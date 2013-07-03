@@ -16,8 +16,8 @@ extern "C" LPCTSTR
 	MAIN_WINDOW_CLASS_NAME,
 	MAIN_WINDOW_TITLE;
 
-#define MAZE_GRID_WIDTH 10
-#define MAZE_GRID_HEIGHT 6
+#define MAZE_GRID_WIDTH 15
+#define MAZE_GRID_HEIGHT 11
 	
 extern const unsigned
 	MAIN_WINDOW_WIDTH,
@@ -40,6 +40,8 @@ extern Gdiplus::SolidBrush
 	*MY_RED_BRUSH,
 	*MY_BLUE_BRUSH,
 	*WEAK_BLACK_BRUSH;
+
+extern const Gdiplus::SmoothingMode GRAPHICS_SMOOTHING_MODE;
 
 #ifdef DEBUG
 extern Debugger *globalDebugger; // DO NOT CHANGE

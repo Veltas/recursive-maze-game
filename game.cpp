@@ -36,73 +36,61 @@ void Game::RecursiveMazeFiller(MazeState &mazeState, int topLeftX, int topLeftY,
 {
 	int splitX = bottomRightX, splitY = bottomRightY;
 	
-	// When not in 1xX situations...
-	if (topLeftX != bottomRightX) {
-		// Choose x coordinate to split remainder by (and draw wall on).
-		splitX = std::rand() % (bottomRightX - topLeftX) + topLeftX + 1;
-		
-		// Draw wall along this split.
-		for (int i = topLeftY; i < bottomRightY; ++i) {
-			mazeState.cellFlags[i][splitX] |= CELL_WALL_LEFT;
-		}
-		
-		// Find a hole to place in this wall.
-		int manipulationPoint = std::rand() % (bottomRightY - topLeftY + 1) + topLeftY;
-		mazeState.cellFlags[manipulationPoint][splitX] ^= CELL_WALL_LEFT;
-		
-		// Morally ambiguous jump cell placer.
-		if (!(std::rand() % MAZE_STRANGE_WALL_EXPECTED_PERIOD)) {
-			TwoArray<int> newJumpPos((std::rand() % 2) ? (splitX - 1) : splitX, manipulationPoint);
-			if (!((newJumpPos.array[0] == mazeState.currentPosition[0]) && (newJumpPos.array[1] == mazeState.currentPosition[1]))
-				&& !((newJumpPos.array[0] == mazeState.end[0]) && (newJumpPos.array[1] == mazeState.end[1]))
-				&& (std::find(mazeState.jumps.begin(), mazeState.jumps.end(), newJumpPos) == mazeState.jumps.end()))
-			{
-				DEBUG_OUT(TEXT("New jump position."));
-				mazeState.jumps.push_back(newJumpPos);
-			}
-		}
+	if ((topLeftX == bottomRightX) || (topLeftY == bottomRightY)) return;
+	
+	splitX = std::rand() % (bottomRightX - topLeftX) + topLeftX + 1;
+	
+	// Draw wall along this split.
+	for (int i = topLeftY; i <= bottomRightY; ++i) {
+		mazeState.cellFlags[i][splitX] |= CELL_WALL_LEFT;
 	}
 	
-	// When not in Xx1 situations...
-	// Same as above 'if', but for other wall type.
-	if (topLeftY != bottomRightY) {
-		splitY = std::rand() % (bottomRightY - topLeftY) + topLeftY + 1;
-		
-		for (int i = topLeftX; i < bottomRightX; ++i) {
-			mazeState.cellFlags[splitY][i] |= CELL_WALL_UP;
-		}
-		
-		int manipulationPoint = std::rand() % (bottomRightX - topLeftX + 1) + topLeftX;
+	splitY = std::rand() % (bottomRightY - topLeftY) + topLeftY + 1;
+	
+	for (int i = topLeftX; i <= bottomRightX; ++i) {
+		mazeState.cellFlags[splitY][i] |= CELL_WALL_UP;
+	}
+	
+	bool
+		doubleSplitVertical = std::rand() % 2,
+		firstYSplit, secondYSplit, firstXSplit, secondXSplit;
+	
+	if (doubleSplitVertical) {
+		firstYSplit = secondYSplit = true;
+	} else {
+		firstYSplit = std::rand() % 2;
+		secondYSplit = !firstYSplit;
+	}
+	
+	if (!doubleSplitVertical) {
+		firstXSplit = secondXSplit = true;
+	} else {
+		firstXSplit = std::rand() % 2;
+		secondXSplit = !firstXSplit;
+	}
+	
+	if (firstYSplit) {
+		int manipulationPoint = std::rand() % (bottomRightY - splitY + 1) + splitY;
+		mazeState.cellFlags[manipulationPoint][splitX] ^= CELL_WALL_LEFT;
+	}
+	if (secondYSplit) {
+		int manipulationPoint = std::rand() % (splitY - topLeftY) + topLeftY;
+		mazeState.cellFlags[manipulationPoint][splitX] ^= CELL_WALL_LEFT;
+	}
+	if (firstXSplit) {
+		int manipulationPoint = std::rand() % (bottomRightX - splitX + 1) + splitX;
 		mazeState.cellFlags[splitY][manipulationPoint] ^= CELL_WALL_UP;
-		
-		if (std::rand() % MAZE_STRANGE_WALL_EXPECTED_PERIOD) {
-			TwoArray<int> newJumpPos(manipulationPoint, (std::rand() % 2) ? (splitY - 1) : splitY);
-			if (!((newJumpPos.array[0] == mazeState.currentPosition[0]) && (newJumpPos.array[1] == mazeState.currentPosition[1]))
-				&& !((newJumpPos.array[0] == mazeState.end[0]) && (newJumpPos.array[1] == mazeState.end[1]))
-				&& (std::find(mazeState.jumps.begin(), mazeState.jumps.end(), newJumpPos) == mazeState.jumps.end()))
-			{
-				mazeState.jumps.push_back(newJumpPos);
-			}
-		}
+	}
+	if (secondXSplit) {
+		int manipulationPoint = std::rand() % (splitX - topLeftX) + topLeftX;
+		mazeState.cellFlags[splitY][manipulationPoint] ^= CELL_WALL_UP;
 	}
 	
 	// Finish the job, call again for rectangles left after splitting to fill rest of maze.
-	if (topLeftY == bottomRightY) {
-		if (topLeftX != bottomRightX) {
-			RecursiveMazeFiller(mazeState, topLeftX, topLeftY, splitX - 1, topLeftY);
-			RecursiveMazeFiller(mazeState, splitX, topLeftY, bottomRightX, topLeftY);
-		}
-	} else {
-		if (topLeftX == bottomRightX) {
-			RecursiveMazeFiller(mazeState, topLeftX, topLeftY, topLeftX, splitY - 1);
-			RecursiveMazeFiller(mazeState, topLeftX, splitY, topLeftX, bottomRightY);
-		} else {
-			RecursiveMazeFiller(mazeState, topLeftX, topLeftY, splitX - 1, splitY - 1);
-			RecursiveMazeFiller(mazeState, splitX, topLeftY, bottomRightX, splitY - 1);
-			RecursiveMazeFiller(mazeState, topLeftX, splitY, splitX - 1, bottomRightY);
-			RecursiveMazeFiller(mazeState, splitX, splitY, bottomRightX, bottomRightY);
-		}
-	}
+	RecursiveMazeFiller(mazeState, topLeftX, topLeftY, splitX - 1, splitY - 1);
+	RecursiveMazeFiller(mazeState, splitX, topLeftY, bottomRightX, splitY - 1);
+	RecursiveMazeFiller(mazeState, topLeftX, splitY, splitX - 1, bottomRightY);
+	RecursiveMazeFiller(mazeState, splitX, splitY, bottomRightX, bottomRightY);
 }
 
 Game::Game()

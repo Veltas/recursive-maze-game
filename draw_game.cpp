@@ -20,8 +20,8 @@ void DrawGame(Gdiplus::Graphics &graphics, Game &currentGame)
 		MY_RED_BRUSH,
 		static_cast<INT>(currentMazeState.currentPosition[0] * MAZE_GRID_CELL_SIZE + 2),
 		static_cast<INT>(currentMazeState.currentPosition[1] * MAZE_GRID_CELL_SIZE + 2),
-		static_cast<INT>(MAZE_GRID_CELL_SIZE - 2),
-		static_cast<INT>(MAZE_GRID_CELL_SIZE - 2));
+		static_cast<INT>(MAZE_GRID_CELL_SIZE - 4),
+		static_cast<INT>(MAZE_GRID_CELL_SIZE - 4));
 	
 	// Draw maze jumps.
 	int numJumps = currentMazeState.jumps.size();
@@ -30,8 +30,8 @@ void DrawGame(Gdiplus::Graphics &graphics, Game &currentGame)
 			MY_BLUE_BRUSH,
 			static_cast<INT>(currentMazeState.jumps[i].array[0] * MAZE_GRID_CELL_SIZE + 3),
 			static_cast<INT>(currentMazeState.jumps[i].array[1] * MAZE_GRID_CELL_SIZE + 3),
-			static_cast<INT>(MAZE_GRID_CELL_SIZE - 3),
-			static_cast<INT>(MAZE_GRID_CELL_SIZE - 3));
+			static_cast<INT>(MAZE_GRID_CELL_SIZE - 5),
+			static_cast<INT>(MAZE_GRID_CELL_SIZE - 5));
 	}
 	
 	// Draw maze.
