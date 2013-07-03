@@ -8,11 +8,11 @@ extern const unsigned
 	MAIN_WINDOW_WIDTH = 640,
 	MAIN_WINDOW_HEIGHT = 480,
 	MAIN_CYCLE_TIMER_ID = 1,
-	MAIN_CYCLE_WAIT = 5000, // Wait between each cycle in ms, 16.666ms = 1 / 60Hz.
-	MAZE_GRID_CELL_SIZE = 10,
+	MAIN_CYCLE_WAIT = 33, // Wait between each cycle in ms, 16.666ms = 1 / 60Hz.
+	MAZE_GRID_CELL_SIZE = 50,
 	CELL_WALL_UP = 1,
 	CELL_WALL_LEFT = 2,
-	MAZE_STRANGE_WALL_EXPECTED_PERIOD = 50;
+	MAZE_STRANGE_WALL_EXPECTED_PERIOD = 5000;
 
 extern Gdiplus::Pen
 	*MY_BLACK_PEN = NULL,

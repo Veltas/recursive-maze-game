@@ -7,6 +7,7 @@
 #include <deque>
 #include <stack>
 #include <cmath>
+#include <ctime>
 #include <algorithm>
 
 #include <Windows.h>

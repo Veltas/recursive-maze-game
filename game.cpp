@@ -107,6 +107,7 @@ void Game::RecursiveMazeFiller(MazeState &mazeState, int topLeftX, int topLeftY,
 
 Game::Game()
 {
+	std::srand(std::time(0));
 	m_HaveCurrentInput = false;
 	InitialiseMazeState(m_CurrentMaze);
 }

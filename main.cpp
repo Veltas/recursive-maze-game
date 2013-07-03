@@ -111,9 +111,7 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 	case WM_PAINT:
 		{
 			PAINTSTRUCT paintJobStruct;
-			HDC deviceContextHandle = BeginPaint(windowHandle, &paintJobStruct);
-			DEBUG_VAL(TEXT("BeginPaint()"), reinterpret_cast<int>(deviceContextHandle));
-			Gdiplus::Graphics graphics(deviceContextHandle);
+			Gdiplus::Graphics graphics(BeginPaint(windowHandle, &paintJobStruct));
 			DrawGame(graphics, *mainGameObject);
 			EndPaint(windowHandle, &paintJobStruct);
 		}

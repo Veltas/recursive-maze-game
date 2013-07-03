@@ -2,30 +2,26 @@
 
 void DrawGame(Gdiplus::Graphics &graphics, Game &currentGame)
 {
-	Gdiplus::Status returnStatus;
-	
 	// Draw background.
-	returnStatus = graphics.FillRectangle(MY_WHITE_BRUSH, 0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
-	DEBUG_VAL(TEXT("graphics.FillRectangle() 1"), returnStatus);
+	graphics.FillRectangle(MY_WHITE_BRUSH, 0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
 	
 	// Draw end.
 	const MazeState &currentMazeState = currentGame.CurrentState();
 	
-	returnStatus = graphics.FillRectangle(
+	graphics.FillRectangle(
 		WEAK_BLACK_BRUSH,
 		static_cast<INT>(currentMazeState.end[0] * MAZE_GRID_CELL_SIZE),
 		static_cast<INT>(currentMazeState.end[1] * MAZE_GRID_CELL_SIZE),
-		static_cast<INT>(MAZE_GRID_CELL_SIZE + 1),
-		static_cast<INT>(MAZE_GRID_CELL_SIZE + 1));
-	DEBUG_VAL(TEXT("graphics.FillRectangle() 2"), returnStatus);
+		static_cast<INT>(MAZE_GRID_CELL_SIZE),
+		static_cast<INT>(MAZE_GRID_CELL_SIZE));
 	
 	// Draw player.
 	graphics.FillEllipse(
 		MY_RED_BRUSH,
 		static_cast<INT>(currentMazeState.currentPosition[0] * MAZE_GRID_CELL_SIZE + 2),
 		static_cast<INT>(currentMazeState.currentPosition[1] * MAZE_GRID_CELL_SIZE + 2),
-		static_cast<INT>(currentMazeState.currentPosition[0] * (MAZE_GRID_CELL_SIZE + 1) - 2),
-		static_cast<INT>(currentMazeState.currentPosition[1] * (MAZE_GRID_CELL_SIZE + 1) - 2));
+		static_cast<INT>(MAZE_GRID_CELL_SIZE - 2),
+		static_cast<INT>(MAZE_GRID_CELL_SIZE - 2));
 	
 	// Draw maze jumps.
 	int numJumps = currentMazeState.jumps.size();
@@ -34,8 +30,8 @@ void DrawGame(Gdiplus::Graphics &graphics, Game &currentGame)
 			MY_BLUE_BRUSH,
 			static_cast<INT>(currentMazeState.jumps[i].array[0] * MAZE_GRID_CELL_SIZE + 3),
 			static_cast<INT>(currentMazeState.jumps[i].array[1] * MAZE_GRID_CELL_SIZE + 3),
-			static_cast<INT>(currentMazeState.jumps[i].array[0] * (MAZE_GRID_CELL_SIZE + 1) - 3),
-			static_cast<INT>(currentMazeState.jumps[i].array[1] * (MAZE_GRID_CELL_SIZE + 1) - 3));
+			static_cast<INT>(MAZE_GRID_CELL_SIZE - 3),
+			static_cast<INT>(MAZE_GRID_CELL_SIZE - 3));
 	}
 	
 	// Draw maze.
