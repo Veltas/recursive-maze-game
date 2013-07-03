@@ -24,14 +24,14 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 	if (Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL) != Gdiplus::Ok) TotalFailureError();
 	
 	// Initialise GDI+ objects
-	MY_BLACK_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0, 0, 0)),
-	MY_WHITE_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF)),
+	MY_BLACK_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0, 0, 0));
+	MY_WHITE_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF));
 	MY_RED_PEN = new Gdiplus::Pen(Gdiplus::Color(0xFF, 0xFF, 0, 0));
 
-	MY_BLACK_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0)),
-	MY_WHITE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF)),
-	MY_RED_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0xFF, 0, 0)),
-	MY_BLUE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0xFF)),
+	MY_BLACK_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0));
+	MY_WHITE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0xFF, 0xFF, 0xFF));
+	MY_RED_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0xFF, 0, 0));
+	MY_BLUE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0xFF));
 	WEAK_BLACK_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xAA, 0, 0, 0));
 	
 	// Register window 'class' with OS in preperation for creating window.
@@ -75,6 +75,16 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 			DispatchMessage(&mainMessage);
 		}
 	}
+	
+	// Destruct GDI+ objects
+	delete MY_BLACK_PEN;
+	delete MY_WHITE_PEN;
+	delete MY_RED_PEN;
+	delete MY_BLACK_BRUSH;
+	delete MY_WHITE_BRUSH;
+	delete MY_RED_BRUSH;
+	delete MY_BLUE_BRUSH;
+	delete WEAK_BLACK_BRUSH;
 	
 	// Deinitialise GDI+.
 	Gdiplus::GdiplusShutdown(gdiplusToken);
