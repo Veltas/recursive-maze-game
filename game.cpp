@@ -26,6 +26,10 @@ void Game::InitialiseMazeState(MazeState &mazeState)
 	// Generate maze within.
 	DEBUG_OUT(TEXT("RecursiveMazeFiller() recursion started"));
 	RecursiveMazeFiller(mazeState, 0, 0, MAZE_GRID_WIDTH - 1, MAZE_GRID_HEIGHT - 1);
+	
+	// Randomly add jumps.
+	// Choose number of jumps.
+	
 }
 
 //	Fills in the walls correctly and sticks in our jumps sometimes, uses 'recursive maze algorithm' from wikipedia because it looked like the easiest, don't judge me etc.

@@ -16,7 +16,7 @@ extern "C" LPCTSTR
 	MAIN_WINDOW_CLASS_NAME,
 	MAIN_WINDOW_TITLE;
 
-#define MAZE_GRID_WIDTH 29
+#define MAZE_GRID_WIDTH 30
 #define MAZE_GRID_HEIGHT 22
 	
 extern const unsigned
@@ -26,8 +26,7 @@ extern const unsigned
 	MAIN_CYCLE_WAIT,
 	MAZE_GRID_CELL_SIZE,
 	CELL_WALL_UP,
-	CELL_WALL_LEFT,
-	MAZE_STRANGE_WALL_EXPECTED_PERIOD;
+	CELL_WALL_LEFT;
 
 extern Gdiplus::Pen
 	*MY_BLACK_PEN,
