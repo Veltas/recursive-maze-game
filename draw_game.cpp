@@ -10,10 +10,10 @@ void DrawGame(Gdiplus::Graphics &graphics, Game &currentGame)
 	
 	graphics.FillRectangle(
 		WEAK_BLACK_BRUSH,
-		static_cast<INT>(currentMazeState.end[0] * MAZE_GRID_CELL_SIZE),
-		static_cast<INT>(currentMazeState.end[1] * MAZE_GRID_CELL_SIZE),
-		static_cast<INT>(MAZE_GRID_CELL_SIZE),
-		static_cast<INT>(MAZE_GRID_CELL_SIZE));
+		static_cast<INT>(currentMazeState.end[0] * MAZE_GRID_CELL_SIZE + 2),
+		static_cast<INT>(currentMazeState.end[1] * MAZE_GRID_CELL_SIZE + 2),
+		static_cast<INT>(MAZE_GRID_CELL_SIZE - 5),
+		static_cast<INT>(MAZE_GRID_CELL_SIZE - 5));
 	
 	// Draw player.
 	graphics.FillEllipse(

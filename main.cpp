@@ -111,9 +111,17 @@ LRESULT CALLBACK MainWindowProcedure(HWND windowHandle, UINT messageCode, WPARAM
 	case WM_PAINT:
 		{
 			PAINTSTRUCT paintJobStruct;
-			Gdiplus::Graphics graphics(BeginPaint(windowHandle, &paintJobStruct));
+			HDC deviceContextHandle = BeginPaint(windowHandle, &paintJobStruct);
+			HDC bufferDeviceContextHandle = CreateCompatibleDC(deviceContextHandle);
+			HBITMAP bufferBitmapHandle = CreateCompatibleBitmap(deviceContextHandle, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+			HGDIOBJ oldBufferBitmapHandle = SelectObject(bufferDeviceContextHandle, bufferBitmapHandle);
+			Gdiplus::Graphics graphics(bufferDeviceContextHandle);
 			graphics.SetSmoothingMode(GRAPHICS_SMOOTHING_MODE);
 			DrawGame(graphics, *mainGameObject);
+			BitBlt(deviceContextHandle, 0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT, bufferDeviceContextHandle, 0, 0, SRCCOPY);
+			SelectObject(bufferDeviceContextHandle, oldBufferBitmapHandle);
+			DeleteDC(bufferDeviceContextHandle);
+			DeleteObject(bufferBitmapHandle);
 			EndPaint(windowHandle, &paintJobStruct);
 		}
 		break;
