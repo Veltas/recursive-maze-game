@@ -6,7 +6,10 @@
 #define UNICODE 1
 //#define DEBUG
 
-
+#define NTDDI_VERSION 0x5010000
+#define _WIN32_WINNT 0x0501
+#define WINVER 0x0501
+// Go digging through Windows.h if you want more NO-XXXX defs.
 
 #ifdef DEBUG
 #define DEBUG_OUT(a) globalDebugger->PrintLine( a )
