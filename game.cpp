@@ -27,9 +27,30 @@ void Game::InitialiseMazeState(MazeState &mazeState)
 	DEBUG_OUT(TEXT("RecursiveMazeFiller() recursion started"));
 	RecursiveMazeFiller(mazeState, 0, 0, MAZE_GRID_WIDTH - 1, MAZE_GRID_HEIGHT - 1);
 	
-	// Randomly add jumps.
-	// Choose number of jumps.
+	// Lazy as f*** jump adder (runs in O(THUMBS UP) time)
+	std::deque<TwoArray<int>> possibleJumps;
 	
+	mazeState.jumps.clear();
+	
+	// Get all possible places for a jump
+	for (int j = 0; j < MAZE_GRID_HEIGHT; ++j) {
+		for (int i = 0; i < MAZE_GRID_WIDTH; ++i) {
+			possibleJumps.push_back(TwoArray<int>(i, j));
+		}
+	}
+	
+	// But not the end or front
+	possibleJumps.pop_front(); possibleJumps.pop_back();
+	
+	// Choose how many atrocities to perform
+	int numberOfJumps = std::rand() % MAZE_JUMPS_MAX + 1;
+	
+	// Randomly remove this amount from the deque and stick them in the maze state.
+	for (int i = 0; i < MAZE_JUMPS_MAX; ++i) {
+		int indexToSteal = std::rand() % possibleJumps.size();
+		mazeState.jumps.push_back(possibleJumps[indexToSteal]);
+		possibleJumps.erase(possibleJumps.begin() + indexToSteal);
+	}
 }
 
 //	Fills in the walls correctly and sticks in our jumps sometimes, uses 'recursive maze algorithm' from wikipedia because it looked like the easiest, don't judge me etc.
@@ -180,4 +201,5 @@ void Game::Input(WPARAM key)
 	}
 }
 
-const MazeState & Game::CurrentState() { return m_CurrentMaze; }
+
+

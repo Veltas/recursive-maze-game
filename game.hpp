@@ -42,7 +42,7 @@ public:
 	Game();
 	void Step(HWND windowHandle);
 	void Input(WPARAM key);
-	const MazeState & CurrentState();
+	inline const MazeState & CurrentState() { return m_CurrentMaze; }
 };
 
 #endif

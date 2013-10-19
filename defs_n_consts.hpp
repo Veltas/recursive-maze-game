@@ -18,6 +18,7 @@ extern "C" LPCTSTR
 
 #define MAZE_GRID_WIDTH 30
 #define MAZE_GRID_HEIGHT 22
+#define MAZE_JUMPS_MAX 5
 	
 extern const unsigned
 	MAIN_WINDOW_WIDTH,
