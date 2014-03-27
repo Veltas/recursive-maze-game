@@ -52,7 +52,7 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 	MY_BLUE_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xFF, 0, 0, 0xFF));
 	WEAK_BLACK_BRUSH = new Gdiplus::SolidBrush(Gdiplus::Color(0xAA, 0, 0, 0));
 	
-	// Register window 'class' with OS in preperation for creating window.
+	// Register window 'class' with OS in preparation for creating window.
 	DEBUG_OUT(TEXT("RegisterClassEx() . . ."));
 	WNDCLASSEX mainWindowClass = {
 		sizeof(WNDCLASSEX), 0, MainWindowProcedure, 0, 0, instanceHandler,
@@ -83,7 +83,7 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 	
 	MSG mainMessage;
 	
-	// Main loop: recieves messages and transmits them so the OS can properly give them to MainWindowProcedure.
+	// Main loop: receives messages and transmits them so the OS can properly give them to MainWindowProcedure.
 	DEBUG_OUT(TEXT("Main Windows message loop starting . . ."));
 	while (BOOL recieveStatus = GetMessage(&mainMessage, mainWindowHandle, 0, 0)) {
 		if (recieveStatus == -1) {
@@ -104,7 +104,7 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 	delete MY_BLUE_BRUSH;
 	delete WEAK_BLACK_BRUSH;
 	
-	// Deinitialise GDI+.
+	// Shut-down GDI+.
 	Gdiplus::GdiplusShutdown(gdiplusToken);
 	
 	// Destruct game objects.
