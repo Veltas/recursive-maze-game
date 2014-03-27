@@ -85,8 +85,8 @@ int CALLBACK WinMain(HINSTANCE instanceHandler, HINSTANCE, LPSTR commandLinePara
 	
 	// Main loop: receives messages and transmits them so the OS can properly give them to MainWindowProcedure.
 	DEBUG_OUT(TEXT("Main Windows message loop starting . . ."));
-	while (BOOL recieveStatus = GetMessage(&mainMessage, mainWindowHandle, 0, 0)) {
-		if (recieveStatus == -1) {
+	while (BOOL receiveStatus = GetMessage(&mainMessage, mainWindowHandle, 0, 0)) {
+		if (receiveStatus == -1) {
 			TotalFailureError();
 		} else {
 			TranslateMessage(&mainMessage);
