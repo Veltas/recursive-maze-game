@@ -1,8 +1,6 @@
 recursive-maze-game
 ===================
 
-A maze game with difficult mazes that can be solved easier with other mazes with the same rules.  Hilarity ensues.
-
 Target Platform:
 Windows XP SP3+
 
@@ -12,4 +10,3 @@ The game may be fun too, we'll see.
 
 So far, basic window.
 Will be using GDI+ to draw the game.
-Possibly involve threads somewhere.
