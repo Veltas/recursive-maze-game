@@ -1,4 +1,3 @@
-#define UNICODE 1
 #include <Windows.h>
 #include <strsafe.h>
 
@@ -10,6 +9,8 @@ void TotalFailureError()
 	
 	errorCode = GetLastError();
 	
+	processHeapHandle = GetProcessHeap();
+	
 	FormatMessage(
 		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 		NULL,
@@ -18,18 +19,21 @@ void TotalFailureError()
 		(LPWSTR) &messageBuffer,
 		0, NULL);
 	
-	processHeapHandle = GetProcessHeap();
+	displayMessage = HeapAlloc(
+		processHeapHandle,
+		HEAP_ZERO_MEMORY,
+		sizeof (TCHAR) * (lstrlen(messageBuffer) + 1 + 80));
 	
-	displayMessage = HeapAlloc(processHeapHandle, HEAP_ZERO_MEMORY, lstrlen(messageBuffer) + 80);
 	StringCchPrintf(
 		displayMessage,
 		HeapSize(processHeapHandle, 0, displayMessage) / sizeof(TCHAR),
-		TEXT("The application failed.  Error code: %d, error message: %s"),
+		TEXT("The application failed. %d: %s"),
 		errorCode, messageBuffer);
+	
 	MessageBox(NULL, displayMessage, TEXT("Error"), MB_OK);
 	
+	LocalFree(LocalHandle((LPCVOID) messageBuffer));
 	HeapFree(processHeapHandle, 0, displayMessage);
-	//HeapFree(messageBuffer);
 	
-	ExitProcess(errorCode);
+	ExitProcess(errorCode); // EXODUS POINT
 }
