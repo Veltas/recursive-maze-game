@@ -3,4 +3,8 @@
 	It uses GetLastError.
 */
 
-extern "C" void TotalFailureError();
+extern
+#ifdef __cplusplus
+	"C"
+#endif
+void TotalFailureError();

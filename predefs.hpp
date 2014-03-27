@@ -3,9 +3,6 @@
 #ifndef _PREDEFS_HPP_INCLUDED_
 #define _PREDEFS_HPP_INCLUDED_
 
-#define UNICODE 1
-//#define DEBUG
-
 #define NTDDI_VERSION 0x5010000
 #define _WIN32_WINNT 0x0501
 #define WINVER 0x0501

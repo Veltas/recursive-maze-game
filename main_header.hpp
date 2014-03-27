@@ -9,7 +9,7 @@
 #include <Gdiplus.h>
 
 #include "defs_n_consts.hpp"
-#include "total_failure_error.hpp"
+#include "total_failure_error.h"
 
 #include "game.hpp"
 #include "draw_game.hpp"

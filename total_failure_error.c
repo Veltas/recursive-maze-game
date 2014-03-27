@@ -1,3 +1,5 @@
+#include "total_failure_error.h"
+
 #include <Windows.h>
 #include <strsafe.h>
 
