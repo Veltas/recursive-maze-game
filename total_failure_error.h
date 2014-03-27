@@ -3,6 +3,8 @@
 	It uses GetLastError.
 */
 
+#pragma once
+
 extern
 #ifdef __cplusplus
 	"C"

@@ -1,7 +1,6 @@
 /* LOL predefs */
 
-#ifndef _PREDEFS_HPP_INCLUDED_
-#define _PREDEFS_HPP_INCLUDED_
+#pragma once
 
 #define NTDDI_VERSION 0x5010000
 #define _WIN32_WINNT 0x0501
@@ -30,6 +29,4 @@
 
 #ifndef DEBUG
 #define DEBUG_ONLY(a) 0
-#endif
-
 #endif

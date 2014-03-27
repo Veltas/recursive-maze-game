@@ -1,10 +1,8 @@
 // Definitions, constants, and also a lot of globals that nobody else wanted.
 
-#ifndef _DEFS_N_CONSTS_INCLUDED_
-#define _DEFS_N_CONSTS_INCLUDED_
+#pragma once
 
 #include "predefs.hpp"
-
 #include <Windows.h>
 #include <Gdiplus.h>
 
@@ -45,6 +43,4 @@ extern const Gdiplus::SmoothingMode GRAPHICS_SMOOTHING_MODE;
 
 #ifdef DEBUG
 extern Debugger *globalDebugger; // DO NOT CHANGE
-#endif
-
 #endif

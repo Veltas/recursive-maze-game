@@ -1,8 +1,6 @@
-#ifndef _DRAW_GAME_HPP_INCLUDED_
-#define _DRAW_GAME_HPP_INCLUDED_
+#pragma once
 
 #include "predefs.hpp"
-
 #include <Windows.h>
 #include <Gdiplus.h>
 
@@ -11,5 +9,3 @@
 #include "game.hpp"
 
 void DrawGame(Gdiplus::Graphics &, Game &currentGame);
-
-#endif

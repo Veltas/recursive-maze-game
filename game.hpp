@@ -1,5 +1,4 @@
-#ifndef _GAME_HPP_INCLUDED_
-#define _GAME_HPP_INCLUDED_
+#pragma once
 
 #include "predefs.hpp"
 
@@ -44,6 +43,3 @@ public:
 	void Input(WPARAM key);
 	inline const MazeState & CurrentState() { return m_CurrentMaze; }
 };
-
-#endif
-

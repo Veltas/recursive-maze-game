@@ -1,8 +1,6 @@
-#ifndef _DEBUGGER_HPP_INCLUDED_
-#define _DEBUGGER_HPP_INCLUDED_
+#pragma once
 
 #include "predefs.hpp"
-
 #include <Windows.h>
 
 class Debugger
@@ -14,5 +12,3 @@ public:
 	void PrintLine(LPCTSTR name, int value); // Prints  name: value
 	~Debugger();
 };
-
-#endif
