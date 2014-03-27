@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "headers/game.hpp"
 
 void Game::InitialiseMazeState(MazeState &mazeState)
 {

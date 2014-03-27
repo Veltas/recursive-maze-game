@@ -1,4 +1,4 @@
-#include "defs_n_consts.hpp"
+#include "headers/defs_n_consts.hpp"
 
 extern "C" LPCTSTR
 	MAIN_WINDOW_CLASS_NAME = TEXT("RecMazeGameMainWindow"),

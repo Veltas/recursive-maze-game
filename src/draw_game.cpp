@@ -1,4 +1,4 @@
-#include "draw_game.hpp"
+#include "headers/draw_game.hpp"
 
 void DrawGame(Gdiplus::Graphics &graphics, Game &currentGame)
 {

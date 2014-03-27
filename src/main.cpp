@@ -1,6 +1,6 @@
 // Recursive Maze Game, entry point source file.  -Veltas
 
-#include "predefs.hpp"
+#include "headers/predefs.hpp"
 
 #include <vector>
 #include <deque>
@@ -10,14 +10,14 @@
 #include <Windows.h>
 #include <Gdiplus.h>
 
-#include "defs_n_consts.hpp"
-#include "total_failure_error.h"
+#include "headers/defs_n_consts.hpp"
+#include "headers/total_failure_error.h"
 
-#include "game.hpp"
-#include "draw_game.hpp"
+#include "headers/game.hpp"
+#include "headers/draw_game.hpp"
 
 #ifdef DEBUG
-#include "debugger.hpp"
+#include "headers/debugger.hpp"
 #endif
 
 // This global is used by main window procedure, controls game logic and stores state.

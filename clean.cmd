@@ -1,1 +1,1 @@
-DEL *.obj *.exe
+DEL obj\*.obj bin\*.exe
